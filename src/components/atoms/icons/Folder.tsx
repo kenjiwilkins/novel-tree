@@ -7,7 +7,7 @@ interface FolderProps {
 export const Folder: React.FC<FolderProps> = ({ className }) => {
   return (
     <svg
-      className={classNames(className, "w-6 h-6")}
+      className={classNames(className, "min-w-6 min-h-6")}
       xmlns="http://www.w3.org/2000/svg"
       height="24px"
       viewBox="0 -960 960 960"

@@ -5,12 +5,14 @@ interface TypographyProps {
   children: React.ReactNode;
   variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "code";
   color?: "primary" | "secondary" | "error";
+  ellipsis?: boolean;
 }
 
 export const Typography: React.FC<TypographyProps> = ({
   children,
   variant,
   color,
+  ellipsis,
 }) => {
   const Tag = variant || "p";
   return (
@@ -26,7 +28,8 @@ export const Typography: React.FC<TypographyProps> = ({
         variant === "h5" && "text-lg font-bold",
         variant === "h6" && "text-base font-bold",
         variant === "p" && "text-base",
-        variant === "code" && "text-sm font-mono"
+        variant === "code" && "text-sm font-mono",
+        ellipsis && "overflow-x-hidden text-ellipsis text-nowrap"
       )}
     >
       {children}

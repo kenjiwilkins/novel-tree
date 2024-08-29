@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { File, Folder } from "../atoms/icons";
+import { Typography } from "../atoms/Typography";
 
 type icon = "folder" | "file";
 
@@ -43,12 +44,14 @@ export const IconButton: React.FC<IconButtonProps> = ({
           : fill === "secondary"
             ? "text-gray-800"
             : "text-gray-500",
-        "flex items-center gap-1 px-2 py-0.5 rounded-md"
+        "flex items-center gap-1 px-2 py-0.5 rounded-md min-w-fit"
       )}
       disabled={disabled}
     >
       {Icon}
-      {children}
+      <Typography variant="p" ellipsis>
+        {children}
+      </Typography>
     </button>
   );
 };

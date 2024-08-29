@@ -7,7 +7,7 @@ interface FileProps {
 export const File: React.FC<FileProps> = ({ className }) => {
   return (
     <svg
-      className={classNames(className, "w-4 h-4")}
+      className={classNames(className, "min-w-4 min-h-4")}
       xmlns="http://www.w3.org/2000/svg"
       height="16px"
       viewBox="0 -960 960 960"

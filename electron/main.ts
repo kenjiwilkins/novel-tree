@@ -72,7 +72,11 @@ ipcMain.handle("open-directory-dialog", async () => {
     return;
   }
   const directory = result.filePaths[0];
-  const files = fs.readdirSync(directory);
+  // return only .txt files
+  const files = fs
+    .readdirSync(directory)
+    .filter((file) => file.endsWith(".txt"));
+
   return {
     files,
     path: directory,
