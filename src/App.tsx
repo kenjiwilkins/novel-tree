@@ -3,6 +3,7 @@ import { atom, useAtomValue, useSetAtom, useAtom } from "jotai";
 import classNames from "classnames";
 import { selectedPageAtom, pages } from "./states/pages";
 import { folderAtom, filesAtom, File } from "./states/directory";
+import { editorFileOrderAtom, editorFilesAtom } from "./states/fileEditor";
 import { Home } from "./components/pages/Home";
 import { FileEditor } from "./components/pages/FileEditor";
 import { SideBar } from "./components/organisms/SideBar";
@@ -15,8 +16,31 @@ function App() {
   const folder = useAtomValue(folderAtom);
   const [files, setFiles] = useAtom(filesAtom);
   const folderName = useMemo(() => folder?.name, [folder]);
+  const [editorFiles, setEditorFiles] = useAtom(editorFilesAtom);
+  const [editorFileOrder, setEditorFileOrder] = useAtom(editorFileOrderAtom);
 
   const onClickFile = (file: File) => {
+    // whther deitorFilesAtom and order has this file
+    const hasFile = editorFiles.some((f) => f.id === file.id);
+    const hasOrder = editorFileOrder.some((f) => f.fileId === file.id);
+    if (!hasFile || !hasOrder) {
+      setEditorFiles([
+        ...editorFiles,
+        {
+          ...file,
+          isEditing: false,
+          isFocused: false,
+          editorState: "",
+        },
+      ]);
+      setEditorFileOrder([
+        ...editorFileOrder,
+        {
+          fileId: file.id,
+          order: editorFileOrder.length,
+        },
+      ]);
+    }
     setFiles(
       files.map((f) => {
         if (f.id === file.id) {
@@ -49,7 +73,7 @@ function App() {
   }, [updateSelectedPageAtom]);
 
   return (
-    <div className="flex gap-0">
+    <div className="flex gap-0 w-screen h-screen overflow-hidden">
       <SideBar>
         <React.Fragment>
           <div className="border-b border-solid -mx-2 px-2">
@@ -78,7 +102,7 @@ function App() {
           ))}
         </ul>
       </SideBar>
-      <div className="flex-1">
+      <div className="flex-1 max-w-full">
         {selectedPage === pages.home && <Home />}
         {selectedPage === pages.fileEditor && <FileEditor />}
       </div>

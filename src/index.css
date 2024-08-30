@@ -19,3 +19,21 @@ body {
     "Segoe UI Symbol",
     "Noto Color Emoji";
 }
+
+/* custom style for thin and transparent scroll bar. but hide unless hovered */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}

@@ -1,13 +1,13 @@
+import { FileTabItem } from "../molecules/FileTabItem";
+import { useAtomValue } from "jotai";
+import { editorFilesAtom } from "../../states/fileEditor";
+
 export function FileTab() {
-  const files = new Array(10).fill(0).map((_, i) => ({
-    name: `file-${i}.txt`,
-  }));
+  const files = useAtomValue(editorFilesAtom);
   return (
-    <div className="w-full max-w-fit inline-flex items-center overflow-x-auto h-10 bg-gray-100">
+    <div className="w-full inline-flex items-center overflow-x-scroll h-10 bg-gray-100 min-w-full">
       {files.map((file, index) => (
-        <div key={index} className="min-w-44">
-          {file.name}
-        </div>
+        <FileTabItem file={file} key={index}></FileTabItem>
       ))}
     </div>
   );

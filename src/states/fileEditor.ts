@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { type File } from "./directory";
 
-interface EditorFile extends File {
+export interface EditorFile extends File {
   isEditing: boolean;
   isFocused: boolean;
   editorState: string;

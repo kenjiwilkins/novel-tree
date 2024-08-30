@@ -5,7 +5,7 @@ import { FileTab } from "../organisms/FileTab";
 
 export function FileEditor() {
   return (
-    <div>
+    <div className="w-full">
       <FileTab />
       <DefaultPage />
     </div>
