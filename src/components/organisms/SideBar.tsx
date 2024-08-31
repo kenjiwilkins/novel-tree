@@ -10,8 +10,8 @@ export const SideBar: React.FC<SideBarProps> = ({ children }) => {
   const sidebarWidth = useAtomValue(sidebarWidthAtom);
   return (
     <aside
-      className="min-w-16 overflow-x-hidden h-screen p-2 border-r border-solid flex flex-col gap-0"
-      style={{ minWidth: `${sidebarWidth}px` }}
+      className="h-screen p-2 border-r border-solid flex flex-col gap-0"
+      style={{ maxWidth: `${sidebarWidth}px` }}
     >
       {children}
     </aside>

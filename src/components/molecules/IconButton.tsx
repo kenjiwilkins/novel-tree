@@ -44,7 +44,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
           : fill === "secondary"
             ? "text-gray-800"
             : "text-gray-500",
-        "flex items-center gap-1 px-2 py-0.5 rounded-md min-w-fit"
+        "flex items-center gap-1 px-2 py-0.5 rounded-md w-full"
       )}
       disabled={disabled}
     >

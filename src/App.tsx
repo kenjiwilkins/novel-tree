@@ -24,12 +24,16 @@ function App() {
     const hasFile = editorFiles.some((f) => f.id === file.id);
     const hasOrder = editorFileOrder.some((f) => f.fileId === file.id);
     if (!hasFile || !hasOrder) {
+      const currentFilesUnfocused = editorFiles.map((f) => ({
+        ...f,
+        isFocused: false,
+      }));
       setEditorFiles([
-        ...editorFiles,
+        ...currentFilesUnfocused,
         {
           ...file,
           isEditing: false,
-          isFocused: false,
+          isFocused: true,
           editorState: "",
         },
       ]);
@@ -40,6 +44,23 @@ function App() {
           order: editorFileOrder.length,
         },
       ]);
+    }
+    if (hasFile && !file.isFocused) {
+      setEditorFiles(
+        editorFiles.map((f) => {
+          if (f.id === file.id) {
+            return {
+              ...f,
+              isFocused: true,
+            };
+          } else {
+            return {
+              ...f,
+              isFocused: false,
+            };
+          }
+        })
+      );
     }
     setFiles(
       files.map((f) => {
@@ -87,7 +108,7 @@ function App() {
             <li
               key={index}
               className={classNames(
-                "hover:bg-gray-100 max-w-fit",
+                "hover:bg-gray-100 w-full",
                 file.isFocused && "bg-gray-200"
               )}
             >
